@@ -21,8 +21,10 @@ link novoNo (int item, link prev, link next) {
 ListaDupla inicializa() {
   ListaDupla aux;
   aux = malloc(sizeof *aux);
-  aux->head = NULL;
   aux->z = novoNo(0, NULL, NULL);
+  aux->head = aux->z;
+  aux->z->next = aux->z;
+  aux->z->prev = aux->z;
   return aux;
 }
 
@@ -91,3 +93,16 @@ void destroiLista(ListaDupla l) {
   free(l);
 }
 
+link menorElemento (ListaDupla l) {
+  link t = l->head, menor = NULL;
+  int item = t->item+1;
+  while ( t != l->z ) {
+    if(t->item < item) {
+      item = t->item;
+      menor = t;
+    }
+    t = t->next;
+  }
+  
+  return menor;
+}
